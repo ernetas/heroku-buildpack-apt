@@ -54,8 +54,10 @@ for PACKAGE in $(cat $BUILD_DIR/Aptfile); do
 done
 
 mkdir -p $BUILD_DIR/.apt/usr/bin
+mkdir -p $BUILD_DIR/.apt/usr/lib
 curl -s -L -o $BUILD_DIR/.apt/usr/bin/pandoc https://github.com/ernetas/pandoc-binary/releases/download/v1.15.0.6/pandoc 2>&1 | indent
 chmod +x $BUILD_DIR/.apt/usr/bin/pandoc
+ln -sf libgmp.so $BUILD_DIR/.apt/usr/lib/libgmp.so.10
 
 for DEB in $(ls -1 $APT_CACHE_DIR/archives/*.deb); do
   topic "Installing $(basename $DEB)"
